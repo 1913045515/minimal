@@ -1,0 +1,13 @@
+{
+  "usingComponents": {
+    "van-cell": "../../vendor/VantUI/cell/index",
+    "van-cell-group":"../../vendor/VantUI/cell-group/index",
+    "van-icon": "../../vendor/VantUI/icon/index",
+    "van-tag": "../../vendor/VantUI/tag/index",
+    "van-row": "../../vendor/VantUI/row/index",
+    "van-col": "../../vendor/VantUI/col/index",
+    "van-dialog": "../../vendor/VantUI/dialog/index"
+  },
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark"
+}

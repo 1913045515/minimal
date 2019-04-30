@@ -1,0 +1,6 @@
+<template name="floatButton">
+
+<button open-type="share">
+<image class="_float_button_image" animation="{{_fb_animation}}" style='left:{{_fb_left}}px;top:{{_fb_top}}px;width:{{_fb_width}}px;height:{{_fb_height}}px;' src='{{_fb_image}}' mode='fit' bindtouchstart='{{_fb_touch_start}}' bindtouchmove='{{_fb_touch_move}}' bindtouchend='{{_fb_touch_release}}' bindtouchcancel='{{_fb_touch_release}}'></image>
+</button>
+</template>

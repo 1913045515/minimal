@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "back-to-top": "/component/back-to-top/index"
+  },
+  "navigationBarTitleText": "迷你喵-排行榜"
+}

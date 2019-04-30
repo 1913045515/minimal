@@ -1,0 +1,9 @@
+<!--component/back-to-top/index.wxml-->
+<!-- 右小角返回顶部组件 -->
+<view class='back-to-top-box'>
+  <view class='back-to-top-box-item' wx:for="{{backToTop}}" wx:key="unique" data-index="{{index}}" catchtap="sendToParent">
+    <image wx:if="{{item.url && item.url != ''}}" class='has-tip' src='{{item.url}}'></image>
+    <text wx:if="{{item.name && item.name != ''}}">{{item.name}}</text>
+    <image wx:else src='{{item.url}}'></image>
+  </view>
+</view>

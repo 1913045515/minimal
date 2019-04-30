@@ -1,0 +1,42 @@
+<import src="../../templates/copyright.wxml" />
+<view class="container">
+    <view class="showerror" style="display:{{showerror}}">
+        <image src="../../images/cry80.png" style="height:100rpx;width:100rpx"></image>
+
+        <view class="errortext">
+            暂时无法访问网络
+            <view class="">
+                <button class="more-button" bindtap="reload" size="mini" bindtap="reload">重新加载</button>
+            </view>
+        </view>
+    </view>
+
+    <view style="display:{{showallDisplay}}">
+        <view class="top-list">
+            <block wx:key="id" wx:for="{{postsList}}">
+                <view class="list-item has-img" index="{{index}}" id="{{item.id}}" bindtap="redictDetail"  bindlongpress="cancelCollet">
+                    <view class="content-title">
+                        <text>{{item.title}}</text>
+                    </view>
+                    <view class="content-date">
+                        <image src="../../images/calendar.png"></image>
+                        <text>收藏时间：{{item.createTimeStr}}</text>
+                    </view>
+                    <image src="{{imageUrl}}{{item.backImg}}" class="cover"></image>
+                </view>
+            </block>
+        </view>
+
+    </view>
+
+    <view class="copyright" style="display:{{floatDisplay}}">
+        <template is="tempCopyright" />
+    </view>
+</view>
+
+
+<!-- 自定义组件-右下角返回顶部 -->
+<back-to-top
+  wx:if='{{backToTop.flag}}'
+  back-to-top='{{backToTop.list}}'
+  bindrtCornerBar='rtCornerBarAction'></back-to-top>

@@ -1,0 +1,48 @@
+<import src="../../templates/copyright.wxml" />
+<import src="../../templates/login-popup.wxml" />
+<!-- <scroll-view class="container" wx:if='{{scrolltxts}}'>
+  <view class="scrolltxt">
+    <view class="marquee_box">
+      <view class="marquee_text" style="transform: translateX(-{{marqueeDistance}}px)">
+        <text>{{text}}</text>
+        <text style="margin-right:{{marquee_margin}}px;"></text>
+        <text style="margin-right:{{marquee_margin}}px;">{{text}}</text>
+      </view>
+    </view>
+    <view class='imgButton' catchtap='cancelScrollTxt'><icon type="cancel" size="20" /></view>
+  </view>
+</scroll-view> -->
+
+<scroll-view style="height:100%;" scroll-y="true" lower-threshold="100rpx">
+  <view class="topic-common-list">
+    <block wx:key="id" wx:for="{{categoriesList}}">
+      <view class="list-item">
+        <view>
+          <image src="{{imageURL}}{{item.backImg}}" class="cover" data-item="{{item.name}}" data-id="{{item.id}}"  data-coin="{{item.coin}}" 
+          data-subflag="{{item.subflag}}" bindtap="redictIndex"></image>
+        </view>
+        <view class="content-title" data-item="{{item.name}}"
+        data-coin="{{item.coin}}" data-subflag="{{item.subflag}} 
+         data-id="{{item.id}}" bindtap="redictIndex">
+          <view class="topic-name">
+            <text>{{item.name}}</text>
+          </view>
+          <view class="topic-img">
+            <image src="../../images/{{item.subimg}}" data-subflag="{{item.subflag}}"  data-id="{{item.id}}"  data-item="{{item.name}}"  data-coin="{{item.coin}}" catchtap="cancelSubject" class="img-menu"></image>
+          </view>
+        </view>
+        <view class="content-brief" data-item="{{item.name}}"  data-coin="{{item.coin}}" data-id="{{item.id}}">
+          <text>{{item.description}}</text>
+        </view>
+      </view>
+    </block>
+  </view>
+</scroll-view>
+
+  <template is="login-popup" data="{{show: isLoginPopup, userInfo: userInfo}}"></template>
+
+<view class="copyright" style="display:{{floatDisplay}}">
+  <template is="tempCopyright" />
+</view>
+
+<van-dialog id="van-dialog" />

@@ -1,0 +1,59 @@
+<import src="../../templates/copyright.wxml" />
+<import src="../../templates/login-popup.wxml" />
+
+<view class="readlog-container">
+  <view class="userinfo">
+    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover" catchtap="clickHead"></image>
+
+    <view class="userinfo-editor">
+      <van-row>
+        <van-col span="120">
+          <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+        </van-col>
+      </van-row>
+
+      <van-row>
+        <van-col span="120">
+          <text class="userinfo-coin">积分：{{coin}}</text>
+        </van-col>
+      </van-row>
+    </view>
+  </view>
+
+  <view class='user-cell' bindtap="clickSign">
+    <van-cell-group>
+      <van-cell title="今日签到" icon="sign" size="large" label="{{typeName1}}">
+        <van-icon slot="right-icon" size="100rpx" name="{{type1}}" class="van-cell__right-icon"/>
+      </van-cell>
+    </van-cell-group>
+  </view>
+
+  <view class='user-cell'>
+    <van-cell-group>
+      <van-cell icon="like-o" title="我的收藏" is-link 
+       data-type="collect" bindtap="clickRedirect" />
+      <van-cell icon="orders-o" title="我的订阅" is-link 
+       data-type="subject" bindtap="clickRedirect"/>
+      <van-cell icon="manager-o" title-class="font-class" title="获取积分" is-link data-type="relationship" bindtap="clickRedirect"/>
+    </van-cell-group>
+  </view>
+
+  <view class='user-cell'>
+    <van-cell-group>
+      <van-cell icon="envelop-o"  title="意见反馈" is-link/>
+      <button class="feedback-button" open-type="feedback"></button>
+      <van-cell icon="service-o" title="在线咨询" is-link/>
+      <button class="contact-button" open-type="contact" bindtap="notifyAdmin"></button>
+    </van-cell-group>
+  </view>
+  <template is="login-popup" data="{{show: isLoginPopup, userInfo: userInfo}}"></template>
+  <view class="copyright" style="display:{{floatDisplay}}">
+    <template is="tempCopyright" />
+  </view>
+</view>
+
+<van-dialog id="van-dialog" />
+
+<view style="display:none;">
+  <ad unit-id="adunit-53931fc61481e02e"></ad>
+</view>

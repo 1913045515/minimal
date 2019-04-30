@@ -1,0 +1,32 @@
+<import src="../../templates/copyright.wxml" />
+<import src="../../templates/loading.wxml" />
+<import src="../../templates/login-popup.wxml" />
+<import src="../../towxml/entry.wxml" />
+
+<!-- loading...加载 -->
+<i-spin fix wx:if="{{spinShowFlag}}"></i-spin>
+
+<view class="headline">{{detail.name}}</view>
+
+<view class="content-date">
+  <image src="../../images/calendar.png"></image>
+  <text class="">{{detail.createTime}}</text>
+  <image src="../../images/pageviews.png"></image>
+  <text>{{detail.readNum}}</text>
+</view>
+
+<view class="videocontent">{{videoTitle}}</view>
+
+<!-- 富文本内容 -->
+<view class="content" style="margin-buttom:10px;border-bottom:1px solid #eee;">
+  <template is="entry" data="{{...articleMD}}" />
+</view>
+
+<view class="copyright" style="display:{{floatDisplay}}">
+  <template is="tempCopyright" />
+</view>
+
+<van-dialog id="van-dialog" />
+<!-- <view style="display:none;">
+  <ad unit-id="adunit-53931fc61481e02e"></ad>
+</view> -->

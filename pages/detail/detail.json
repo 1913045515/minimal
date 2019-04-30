@@ -1,0 +1,12 @@
+{
+    "usingComponents": {
+        "back-to-top": "/component/back-to-top/index",
+        "i-spin": "../../dist/spin/index",
+        "i-tag": "../../dist/tag/index",
+        "i-icon": "../../dist/icon/index",
+        "i-divider": "../../dist/divider/index",
+        "i-message": "../../dist/message/index"
+    },
+    "navigationStyle": "custom",
+    "navigationBarTextStyle": "black"
+}

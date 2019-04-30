@@ -1,0 +1,6 @@
+{
+    "usingComponents": {
+      "van-dialog": "../../vendor/VantUI/dialog/index"
+    },
+    "navigationBarTitleText": "我的订阅"
+}

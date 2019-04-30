@@ -1,0 +1,26 @@
+<template name="tempCommonList">
+  <view class="common-list">
+    <block wx:key="id" wx:for="{{postsList}}">
+      <view class="list-item has-img" index="{{index}}" id="{{item.id}}" bindtap="redictDetail">
+        <image src="https://www.wolzq.com{{item.backImg}}" mode="aspectFill" class="cover"></image>
+        <view class="content-title">
+          <text>{{item.title}}</text>
+        </view>
+        <view class="content-desc">
+          <text>{{item.sketch}}</text>
+        </view>
+        <view class="content-date">
+          <text class='cate'>{{item.authorName}}</text>
+          <image src="../../images/calendar.png"></image>
+          <text>{{item.updateTimeStr}}</text>
+          <image src="../../images/comments.png"></image>
+          <text class="">{{item.commentNum}}</text>
+          <image src="../../images/pageviews.png"></image>
+          <text class="">{{item.readNum}}</text>
+          <image src="../../images/home-like.png"></image>
+          <text class="">{{item.likeNum}}</text>        
+        </view>
+      </view>
+    </block>
+  </view>  
+</template>

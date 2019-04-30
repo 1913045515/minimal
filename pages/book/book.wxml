@@ -1,0 +1,38 @@
+<import src="../../templates/copyright.wxml" />
+<import src="../../templates/login-popup.wxml" />
+<view>
+    <scroll-view style="height:100%;" scroll-y="true" lower-threshold="100rpx">
+  <view class="topic-common-list">
+    <block wx:key="id" wx:for="{{categoriesList}}">
+      <view class="list-item" wx:if="{{(index+1)%2==1}}">
+        <view class='video-img'>
+          <image src="{{imageURL}}{{item.backImg}}" class="cover" data-item="{{item.name}}" data-id="{{item.id}}" data-coin="{{item.coin}}" bindtap="redictIndex"></image>
+        </view>
+        <view class="content-title" data-item="{{item.name}}" data-coin="{{item.coin}}" data-id="{{item.id}} " bindtap="redictIndex">
+          <view class="topic-name ">
+            <text>{{item.name}}</text>
+          </view>
+        </view>
+      </view>
+      
+      <view class="list-item list-item-right " wx:else>
+        <view class='video-img'>
+          <image src="{{imageURL}}{{item.backImg}}" class="cover" data-item="{{item.name}}" data-id="{{item.id}} " data-coin="{{item.coin}}" bindtap="redictIndex"></image>
+        </view>
+        <view class="content-title" data-item="{{item.name}} " data-coin="{{item.coin}}" data-id="{{item.id}}" bindtap="redictIndex">
+          <view class="topic-name">
+            <text>{{item.name}}</text>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+</scroll-view>
+ </view>
+<template is="login-popup" data="{{show: isLoginPopup, userInfo: userInfo}}"></template>
+
+<view class="copyright" style="display:{{floatDisplay}}">
+  <template is="tempCopyright" />
+</view>
+
+<van-dialog id="van-dialog" />

@@ -1,0 +1,200 @@
+<!--pages/post/post.wxml-->
+<import src="../../templates/loading.wxml" />
+<import src="../../templates/modal-view/modal-view.wxml" />
+<import src="../../templates/login-popup.wxml" />
+<import src="../../templates/copyright.wxml" />
+<import src="../../towxml/entry.wxml" />
+
+<!-- loading...加载 -->
+<i-spin fix wx:if="{{spinShowFlag}}"></i-spin>
+<view class="nav">
+  <view class="nav-text" bindtap="returnPage">{{backUp}}</view>
+  <view bindtap="returnPage" class='return nav-return'></view>
+</view>
+
+<!-- 文本区域 -->
+<view class="content">
+  <!-- 标题区域 -->
+  <view slot="title" class="top">
+    <view class="stickyTitle">{{article.article.title}}</view>
+    <view class="titleTags">
+      <!-- <i-tag wx:for="{{article.tags}}" wx:key="id" type="border" style="margin-right: 5px;">
+        {{item.tagName}}
+      </i-tag> -->
+      <view class="content-date">
+        <!-- <image src="../../images/homeHead.png"></image> -->
+        <text class="">{{article.article.authorName}}</text>
+        <!-- <image src="../../images/calendar.png"></image> -->
+        <text>{{createDate}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 富文本内容 -->
+  <view slot="content" style="margin-top:10px;margin-buttom:10px;border-bottom:1px solid #eee;">
+    <template is="entry" data="{{...articleMD}}" />
+  </view>
+
+  <ad unit-id="adunit-5dcd851736c0bf1c"></ad>
+
+  <!-- 点赞、评论区域 -->
+  <view class="likePost" style="display:{{displayLike}}">
+    <view class="like-header">您的点赞，就是对我最好的支持~
+    </view>
+    <view class="likeTitle-img">
+      <image src="../../images/new-like.png" class="img-like" id="liketop" catchtap="clickLike"></image>
+    </view>
+    <view class="likeText">
+      <block wx:key="id" wx:for="{{likeList}}">
+        <image src="{{item}}" class="gravatarLikeImg"></image>
+      </block>
+    </view>
+  </view>
+
+  <view class="commentheader">
+    相关推荐
+  </view>
+  <view style="display:{{display}}">
+    <view class="top-list">
+      <block wx:key="id" wx:for="{{guessLikeList}}">
+        <view class="list-item has-img" index="{{index}}" id="{{item.id}}" bindtap="redictDetail">
+          <view class="content-title">
+            <text>{{item.title}}</text>
+          </view>
+          <view class="content-date">
+            <image src="../../images/detail-head.png"></image>
+            <text class="">{{item.authorName}}</text>
+            <image src="../../images/home-like.png"></image>
+            <text class="">{{item.likeNum}}</text>
+          </view>
+          <image src="https://www.wolzq.com{{item.backImg}}" class="cover"></image>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <!-- 评论区域 -->
+  <view style="display:{{display}}">
+    <!-- <view class="relatedTitle" id="relatedTitle">
+      评论交流 {{enableComment?'(点击评论内容可以回复)':''}}
+    </view>
+    <view class="entry-gap-like">
+    </view> -->
+    <view class="commentheader">
+      评论({{commentCount}})
+    </view>
+
+    <block wx:key="id" wx:for="{{commentsList}}">
+      <view class="comment">
+        <view class="comment-user">
+          <image src="{{item.author_url}}" class="gravatarImg"></image>
+          <view style='display:flex;flex-direction: row; justify-content: space-between;width: 100%'>
+            <view style='font-weight:bold;' bindtap="replay" data-id="{{item.id}}" data-name="{{item.author_name}}" data-userid="{{item.userid}}" data-formId="{{item.formId}}" data-commentdate="{{item.date}}">{{item.author_name}}</view>
+            <view bindtap="replay" data-id="{{item.id}}" data-name="{{item.author_name}}" data-userid="{{item.userid}}" data-formId="{{item.formId}}" data-commentdate="{{item.date}}">{{item.date}}</view>
+          </view>
+        </view>
+        <view class="comment-summary" bindtap="replay" data-id="{{item.id}}" data-name="{{item.author_name}}" data-userid="{{item.userid}}" data-formId="{{item.formId}}" data-commentdate="{{item.date}}"> {{item.content}}</view>
+
+        <!-- 一级回复-->
+        <view wx:for="{{item.child}}" wx:key="itemid1" wx:for-index="idx" wx:for-item="item1">
+          <view class="replay-user" data-id="{{item1.id}}" data-name="{{item1.author_name}}" data-userid="{{item1.userid}}" data-formId="{{item1.formId}}" data-commentdate="{{item1.date}}">
+            {{item1.author_name}} 回复{{item.author_name}}:{{item1.content}}
+          </view>
+        </view>
+        <!-- 一级回复-->
+      </view>
+    </block>
+
+    <view style="display:{{display}}">
+      <view style='display:{{isLoading?"block":"none"}}'>
+        <template is="tempLoading" />
+      </view>
+      <view style="display:{{isLastPage?'block':'none'}}">
+        <view class="no-more">---无更多评论---</view>
+      </view>
+    </view>
+    <modal title="{{dialog.title}}" hidden="{{dialog.hidden}}" no-cancel bindconfirm="confirm">
+      {{dialog.content}}
+    </modal>
+  </view>
+
+  <template is="modalView" data="{{...__modalView__}}" />
+
+  <view class="canvas-box">
+    <canvas style="width: 600px;height: 970px;" canvas-id="mycanvas" />
+  </view>
+
+  <view class="ditail-copyright" style="display:{{display}}">
+    <template is="tempCopyright" />
+  </view>
+
+  <template is="login-popup" data="{{show: isLoginPopup, userInfo: userInfo}}"></template>
+
+  <!-- 评论tab -->
+  <view style="display:{{enableComment?'block':'none'}}">
+    <view class="menuBackground" catchtap="hiddenMenubox" style="display:{{menuBackgroup ? 'block' : 'none'}}"></view>
+    <view style="display:{{display}}">
+      <view class="comment-fixed">
+        <form catchsubmit="formSubmit" report-submit="true">
+          <view class="comment-respond">
+            <input class="comment-input" maxlength="200" name="inputPostID" value="{{postID}}" style="display:none" />
+            <view class="comment-box">
+              <image src="../../images/entry-home.png" class="img-plus" style="margin-left:20rpx;margin-right:20rpx" catchtap="goHome"></image>
+              <input class="comment-input" type='text' confirm-type="send" cursor-spacing="10" maxlength="100" name="inputComment" value="{{content}}" placeholder="{{placeholder}}" focus="{{focus}}" bindblur="onReplyBlur" bindfocus="onRepleyFocus" />
+              <button class="comment-button touch-active" formType="submit">发送</button>
+              <image src="../../images/plus.png" class="img-plus" catchtap="showHideMenu" mode=""></image>
+            </view>
+            <!--功能图标-->
+            <view class="menu-box {{isShow ? 'emoji-move-in' : 'emoji-move-out'}} {{isLoad ? 'no-emoji-move' : ''}}">
+              <view class="iconList">
+                <view class="iconLine">
+                  <view style="width:25%; position: relative; float:left; text-align:center">
+
+                    <view>
+                      <image src="../../images/forwarding.png" class="img-menu"></image>
+                    </view>
+                    <view>
+                      <text>转发</text>
+                    </view>
+                    <button class="share-button share-button touch-active" open-type="share">
+                    </button>
+                  </view>
+                  <view style="width:25%; float:left; text-align:center">
+                    <view>
+                      <image src="../../images/poster.png" catchtap="downimageTolocal" class="img-menu"></image>
+                    </view>
+                    <view>
+                      <text>海报</text>
+                    </view>
+                  </view>
+                  <view style="width:25%; float:left; text-align:center">
+                    <view>
+                      <image src="../../images/copy.png" class="img-menu" catchtap="gotowebpage"></image>
+                    </view>
+                    <view>
+                      <text>阅读原文</text>
+                    </view>
+                  </view>
+
+                  <view style="width:25%; float:left; text-align:center">
+                    <view>
+                      <image src="../../images/{{likeImag}}" catchtap="clikeCollect" id="likebottom" class="img-menu"></image>
+                    </view>
+                    <view>
+                      <text>收藏</text>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </form>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 自定义组件-右下角返回顶部 -->
+<back-to-top wx:if='{{backToTop.flag}}' back-to-top='{{backToTop.list}}' bindrtCornerBar='rtCornerBarAction'></back-to-top>
+
+<i-message id="message" />

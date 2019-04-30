@@ -1,0 +1,50 @@
+<import src="../../templates/copyright.wxml" />
+<import src="../../templates/floatButton/floatButton.wxml" />
+<view>
+  <image class="img" lazy-load="true" mode="widthFix" 
+  src="{{shareBackImg}}"></image>
+</view>
+<view class="container">
+    <view class="showerror" style="display:{{showerror}}">
+        <image src="../../images/cry80.png" style="height:100rpx;width:100rpx"></image>
+
+        <view class="errortext">
+            暂时无法访问网络
+            <view class="">
+                <button class="more-button" bindtap="reload" size="mini" bindtap="reload">重新加载</button>
+            </view>
+        </view>
+    </view>
+
+    <view style="display:{{showallDisplay}}">
+        <view class="top-list">
+            <block wx:key="id" wx:for="{{postsList}}">
+                <view class="list-item has-img" index="{{index}}" id="{{item.id}}">
+                    <view class="content-title">
+                        <text>微信昵称：{{item.nickname}}</text>
+                    </view>
+                    <view class="content-date">
+                        <image src="../../images/coin.png"></image>
+                        <text class="">推荐奖励：{{item.coin}}积分</text>
+                    </view>
+                    <view class="content-date">
+                        <image src="../../images/calendar.png"></image>
+                        <text>推荐时间：{{item.createTimeStr}}</text>
+                    </view>
+                    <image src="{{item.headPortrait}}" class="cover"></image>
+                </view>
+            </block>
+        </view>
+    </view>
+    <view class="copyright" style="display:{{floatDisplay}}">
+        <template is="tempCopyright" />
+    </view>
+</view>
+
+<template is="floatButton" data="{{...share}}" />
+
+<!-- 自定义组件-右下角返回顶部 -->
+<back-to-top
+  wx:if='{{backToTop.flag}}'
+  back-to-top='{{backToTop.list}}'
+  bindrtCornerBar='rtCornerBarAction'></back-to-top>

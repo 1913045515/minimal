@@ -1,0 +1,40 @@
+/* component/back-to-top/index.wxss */
+.back-to-top-box{
+  position: fixed;
+  right: 30rpx;
+  bottom: 158rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.back-to-top-box-item{
+  margin-bottom: 20rpx;
+  width: 94rpx;
+  height: 94rpx;
+  background: #fff;
+  border: 1rpx solid #d3d3d3;
+  border-radius: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.back-to-top-box>view:last-child{
+  margin-bottom: 0!important;
+}
+.back-to-top-box-down{
+  margin-bottom: 0!important;
+}
+.back-to-top-box-item image{
+  width: 50rpx;
+  height: 50rpx;
+}
+.back-to-top-box-item text{
+  font-size: 20rpx;
+  color: #43484b;
+}
+.has-tip{
+  width: 30rpx!important;
+  height: 30rpx!important;
+}

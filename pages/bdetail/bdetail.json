@@ -1,0 +1,6 @@
+{
+    "usingComponents": {
+      "van-dialog": "../../vendor/VantUI/dialog/index",
+      "i-spin": "../../dist/spin/index"
+    }
+}

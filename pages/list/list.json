@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "back-to-top": "/component/back-to-top/index"
+  }
+}

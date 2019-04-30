@@ -1,0 +1,103 @@
+<scroll-view class="container" wx:if='{{scrolltxts}}'>
+  <view class="scrolltxt">
+    <view class="marquee_box">
+      <view class="marquee_text">
+        <text>{{text}}</text>
+      </view>
+    </view>
+    <view class='imgButton' catchtap='cancelScrollTxt'><icon type="cancel" size="20" /></view>
+  </view>
+</scroll-view>
+
+<!-- 首页幻灯片 -->
+<view class="index-header" style="display:{{displaySwiper}}">
+  <swiper class="index-swiper" indicator-dots="true" interval="10000" autoplay="true" indicator-color="rgba(255, 255, 255, .2)" indicator-active-color="rgba(255, 255, 255, .7)">
+    <block wx:key="id" wx:for="{{postsShowSwiperList}}">
+      <swiper-item id="{{item.id}}" index="{{index}}" data-redicttype="{{item.type}}" data-appid="{{item.appid}}" data-url="{{item.url}}" data-articleid="{{item.articleId}}" bindtap="redictAppDetail">
+        <image class="itemImg" mode="aspectFill" src="{{imageUrl}}{{item.backImg}}" style="width:95%" />
+        <view class="swiper-mask"></view>
+        <view class="swiper-desc">
+          <text>{{item.title}}</text>
+        </view>
+      </swiper-item>
+    </block>
+  </swiper>
+</view>
+
+<view class="">
+  <!-- 首页搜索框 -->
+  <form catchsubmit="formSubmit" catchreset="formReset" id="search-form">
+    <view class="search-pancel">
+      <input value="" id="search-input" name="input" confirm-type="search" class="search-input" placeholder="搜索你感兴趣的内容..." bindconfirm="formSubmit"></input>
+      <button class="search-button" form-type="submit" size="mini" plain="true">
+        <icon type="search" color="#959595" size="12" />
+      </button>
+    </view>
+  </form>
+
+  <!--图标导航-->
+  <view class="container">
+    <view class="cms-tit">
+      <view class="cms-tit-left"></view>
+      <view class="cms-tit-txt">猜你喜欢</view>
+      <view class="cms-tit-more" data-foodlink="yeehee"> </view>
+    </view>
+
+    <view class='top-Nav2'>
+      <block wx:for="{{likeList}}" wx:key="id">
+        <navigator url='{{item.url}}' hover-class='none'>
+          <view class='.top-Nav2-item'>
+            <image src='{{item.backImg}}'></image>
+            <text>{{item.name}}</text>
+          </view>
+        </navigator>
+      </block>
+    </view>
+  </view>
+
+  <view class="container">
+    <view class="cms-tit">
+      <view class="cms-tit-left"></view>
+      <view class="cms-tit-txt">最新文章</view>
+    </view>
+  </view>
+
+  <!-- Posts -->
+  <view class="post-card" wx:for="{{articles}}" wx:key="id" animation="{{anp}}">
+    <!-- Navigator页面跳转 -->
+    <navigator url="../detail/detail?id={{item.article.id}}">
+      <view class="post-card-image-link">
+        <image class="img" lazy-load="true" mode="widthFix" src="{{imageUrl}}{{item.article.backImg}}"></image>
+      </view>
+      <view class="post-card-content">
+        <view class="title">{{item.article.title}}</view>
+        <view class="summary">{{item.article.sketch}}</view>
+        <view class="footer">
+          <view class="content-date">
+            <image src="../../images/homeHead.png"></image>
+            <text class="">{{item.article.authorName}}</text>
+            <image src="../../images/pageviews.png"></image>
+            <text class="">{{item.article.readNum}}</text>
+            <image src="../../images/home-like.png"></image>
+            <text class="">{{item.article.likeNum}}</text>
+            <image src="../../images/calendar.png"></image>
+            <text>{{item.article.createTimeStr}}</text>
+          </view>
+        </view>
+      </view>
+    </navigator>
+  </view>
+  <i-message id="message" />
+</view>
+
+<!-- 自定义组件-右下角返回顶部 -->
+<back-to-top
+  wx:if='{{backToTop.flag}}'
+  back-to-top='{{backToTop.list}}'
+  bindrtCornerBar='rtCornerBarAction'></back-to-top>
+  
+<i-load-more tip="{{appletInfo.bottomTip}}" loading="{{loadMoreFlag}}" hidden="{{loadMoresFlag}}" />
+
+<view style="display:none;">
+  <ad unit-id="adunit-814a7a7c63e41b19"></ad>
+</view>
